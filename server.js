@@ -167,7 +167,12 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
  router.route('/clean')
  .post(function(req, res) {
-
+ 	Class.remove({}, function(err) {
+ 		if(err) res.send(err);
+ 		else {
+ 			res.send('success');
+ 		}
+ 	});
  });
 
  app.use('/apiv1', router);
