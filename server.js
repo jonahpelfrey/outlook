@@ -84,7 +84,7 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 
-mongoose.connect("mongodb://localhost/outlook");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/outlook");
 
 var db = mongoose.connection;
 
@@ -163,6 +163,11 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 		if(err) res.send(err);
 		else { res.json(classes); }
 	});
+ });
+
+ router.route('/clean')
+ .post(function(req, res) {
+
  });
 
  app.use('/apiv1', router);
